@@ -1,33 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: "Interstellar",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkM8CdEzi1ETGZgwkTgPgR9OOirqY2ljIMg8a-Vvx0stnMCHzO",
-      director: "Christopher Nolan",
-    },
-    {
-      id: 2,
-      title: "Inception",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmaTHAbTa2MTEGM_PwqBU61jEzjEcQfx-Zb39fyctMdZheq2Uj",
-      director: "Christopher Nolan",
-    },
-    {
-      id: 3,
-      title: "The Matrix",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BMmNiOGVlZWQtODU5MC00YWQxLTg4OGEtNmUyMjc2ZTRkMmIyXkEyXkFqcGc@._V1_.jpg",
-      director: "The Wachoskis",
-    },
-  ]);
+  const [movies, setMovies] = useState([]);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  useEffect(() => {
+    fetch("https://mymov-e6f0370bab7c.herokuapp.com/movies")
+        .then((response) => response.json())
+        .then((data) => {
+        const moviesFromApi = data.docs.map((doc) => {
+            return {
+                id: doc.key,
+                title: doc.title,
+                image: "",
+                director: doc.director,
+            };
+        });
+
+        setMovies(moviesFromApi);
+  });
+}, []);
 
   if (selectedMovie) {
     return (
