@@ -1,10 +1,13 @@
 import { createRoot } from "react-dom/client";
 import { MainView } from "./main-view/main-view";
+import Container from "react-bootstrap/Container";
 import "./index.scss";
 
 const MyFlixApplication = () => {
   return;
-  <MainView />;
+  <Container>
+     <MainView />;
+  </Container>
 };
 
 const container = document.querySelector("#root");
