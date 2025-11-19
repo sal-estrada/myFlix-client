@@ -17,20 +17,33 @@ export const SignupView = () => {
       birthday: birthday,
     };
 
+    console.log("Attempting to register user with data:", data);
+
     fetch("https://mymov-e6f0370bab7c.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => {
-      if (response.ok) {
-        alert("Signup successful");
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(errorData => {
+            throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+          });
+        }
+      })
+      .then((data) => {
+        console.log("Signup successful:", data);
+        alert("Signup successful! Please log in.");
         window.location.reload();
-      } else {
-        alert("Signup failed.");
-      }
-    });
+      })
+      .catch((error) => {
+        console.error("Signup error:", error);
+        alert(`Signup failed: ${error.message}`);
+      });
   };
 
   return (
