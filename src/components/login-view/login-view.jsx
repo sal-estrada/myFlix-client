@@ -2,9 +2,9 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const LoginView = () => {
-  // Might need to add onLoggedIn inside parantheses
+export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -51,7 +51,7 @@ export const LoginView = () => {
         <Form.Control
           type="password"
           value={password}
-          onChange={(e) => password(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           required
           minLength="3"
         />

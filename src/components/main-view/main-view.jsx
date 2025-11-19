@@ -80,7 +80,10 @@ export const MainView = () => {
                 <Navigate to="/" />
               ) : (
                 <Col md={5}>
-                  <LoginView onLoggedIn={(user) => setUser(user)} />
+                  <LoginView onLoggedIn={(user, token) => {
+                    setUser(user);
+                    setToken(token);
+                  }} />
                 </Col>
               )
             }
@@ -105,7 +108,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/movies/:moviesId"
+            path="/movies/:movieId"
             element={
               !user ? (
                 <Navigate to="/login" replace />

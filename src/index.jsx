@@ -5,10 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
 const MyFlixApplication = () => {
-  return;
+  return (
   <Container>
-     <MainView />;
+     <MainView />
   </Container>
+  );
 };
 
 const container = document.querySelector("#root");
