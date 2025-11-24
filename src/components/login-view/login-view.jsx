@@ -18,11 +18,6 @@ export const LoginView = ({ onLoggedIn }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then(async (response) => {
-        const text = await response.text();
-        console.log("RAW RESPONSE:", text); // what the server REALLY sent
-        return JSON.parse(text); // this will still fail if not JSON
-      })
       .then((response) => response.json())
       .then((data) => {
         console.log("Login response: ", data);
