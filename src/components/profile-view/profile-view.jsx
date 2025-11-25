@@ -48,7 +48,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 
   return (
     <Col md={8}>
-      <h1>{user.Username}'s Profile</h1>
+      <h1>{user.username}'s Profile</h1>
 
       <Form onSubmit={handleUpdate} className="mb-4">
         <Form.Group>
