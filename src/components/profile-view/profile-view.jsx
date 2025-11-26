@@ -3,10 +3,10 @@ import { Button, Form, Col } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
 export const ProfileView = ({ user, token, movies, setUser }) => {
-  const [username, setUsername] = useState(user.Username);
+  const [username, setUsername] = useState(user.username);
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState(user.Email);
-  const [birthday, setBirthday] = useState(user.Birthday?.slice(0, 10));
+  const [email, setEmail] = useState(user.email);
+  const [birthday, setBirthday] = useState(user.birthday?.slice(0, 10));
 
   const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m.id));
 
