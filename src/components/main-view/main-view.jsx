@@ -20,8 +20,8 @@ export const MainView = () => {
   useEffect(() => {
     fetch("https://mymov-e6f0370bab7c.herokuapp.com/movies", {
       headers: {
-        "Authorization": `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -30,10 +30,18 @@ export const MainView = () => {
             id: doc._id,
             Title: doc.Title,
             Description: doc.Description,
-            Genre: doc.Genre,
+            Genre: {
+              Name: doc.Genre.Name,
+              Description: doc.Genre.Description,
+            },
             image: "",
-            Director: doc.director,
-            Actors: doc.Actors
+            Director: {
+              Name: doc.Director.Name,
+              Bio: doc.Director.Bio,
+              Birth: doc.Director.Birth,
+              Death: doc.Director.Death || null,
+            },
+            Actors: doc.Actors,
           };
         });
 
@@ -87,10 +95,12 @@ export const MainView = () => {
                 <Navigate to="/" />
               ) : (
                 <Col md={5}>
-                  <LoginView onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                  }} />
+                  <LoginView
+                    onLoggedIn={(user, token) => {
+                      setUser(user);
+                      setToken(token);
+                    }}
+                  />
                 </Col>
               )
             }
