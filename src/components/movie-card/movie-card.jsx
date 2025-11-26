@@ -7,11 +7,11 @@ import "./movie-card.scss";
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
     <Card className="h-100">
-      <Card.Img variant="top" src={movie.image} />
+      <Card.Img variant="top" src={movie.Image} />
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.director}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Director}</Card.Text>
+        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
           <Button onClick={() => onMovieClick(movie)} variant="link">
             Open
           </Button>
