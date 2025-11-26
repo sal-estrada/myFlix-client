@@ -28,20 +28,20 @@ export const MainView = () => {
         const moviesFromApi = data.map((doc) => {
           return {
             id: doc._id,
-            Title: doc.Title,
-            Description: doc.Description,
-            Genre: {
-              Name: doc.Genre.Name,
-              Description: doc.Genre.Description,
+            title: doc.Title,
+            description: doc.Description,
+            genre: {
+              name: doc.Genre.Name,
+              description: doc.Genre.Description,
             },
             image: "",
-            Director: {
-              Name: doc.Director.Name,
-              Bio: doc.Director.Bio,
-              Birth: doc.Director.Birth,
-              Death: doc.Director.Death || null,
+            director: {
+              name: doc.Director.Name,
+              bio: doc.Director.Bio,
+              birth: doc.Director.Birth,
+              death: doc.Director.Death || null,
             },
-            Actors: doc.Actors,
+            actors: doc.Actors,
           };
         });
 
