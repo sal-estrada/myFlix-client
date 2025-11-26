@@ -18,7 +18,11 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
   useEffect(() => {
-    fetch("https://mymov-e6f0370bab7c.herokuapp.com/movies")
+    fetch("https://mymov-e6f0370bab7c.herokuapp.com/movies", {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         const moviesFromApi = data.docs.map((doc) => {
