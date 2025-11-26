@@ -27,41 +27,27 @@ export const MainView = () => {
       .then((data) => {
         const moviesFromApi = data.map((doc) => {
           return {
-            id: doc._id,
-            title: doc.Title,
-            description: doc.Description,
+            id: (doc._id && (doc._id.$oid || doc._id)) || doc.id,
+            title: doc.Title || doc.title,
+            description: doc.Description || doc.description || "",
             genre: {
-              name: doc.Genre.Name,
-              description: doc.Genre.Description,
+              name: doc.Genre?.Name || doc.Genre?.name || "",
+              description: doc.Genre?.Description || doc.Genre?.description || "",
             },
-            image: "",
+            image: doc.ImagePath || doc.Image || doc.image || "",
             director: {
-              name: doc.Director.Name,
-              bio: doc.Director.Bio,
-              birth: doc.Director.Birth,
-              death: doc.Director.Death || null,
+              name: doc.Director?.Name || doc.Director?.name || doc.Director || "",
+              bio: doc.Director?.Bio || "",
+              birth: doc.Director?.Birth || null,
+              death: doc.Director?.Death || null,
             },
-            actors: doc.Actors,
+            actors: doc.Actors || doc.actors || [],
           };
         });
 
         setMovies(moviesFromApi);
       });
   }, []);
-
-  // useEffect(() => {
-  //   if (!token) {
-  //     return;
-  //   }
-
-  //   fetch("https://mymov-e6f0370bab7c.herokuapp.com/movies", {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((movies) => {
-  //       setMovies(movies);
-  //     });
-  // }, [token]);
 
   return (
     <BrowserRouter>
@@ -163,50 +149,4 @@ export const MainView = () => {
   );
 };
 
-//   return (
-//     <Row className="justify-content-md-center">
-//       {!user ? (
-//         <Col md={5}>
-//           <LoginView
-//             onLoggedIn={(user, token) => {
-//               setUser(user);
-//               setToken(token);
-//             }}
-//           />
-//           <SignupView />
-//         </Col>
-//       ) : selectedMovie ? (
-//         <Col md={8}>
-//           <MovieView
-//             movie={selectedMovie}
-//             onBackClick={() => setSelectedMovie(null)}
-//           />
-//         </Col>
-//       ) : movies.length === 0 ? (
-//         <div>The list is empty!</div>
-//       ) : (
-//         <>
-//           {movies.map((movie) => (
-//             <Col className="mb-5" key={movie.id} md={3}>
-//               <MovieCard
-//                 movie={movie}
-//                 onMovieClick={(newSelectedMovie) => {
-//                   setSelectedMovie(newSelectedMovie);
-//                 }}
-//               />
-//             </Col>
-//           ))}
-//           <button
-//             onClick={() => {
-//               setUser(null);
-//               setToken(null);
-//               localStorage.clear();
-//             }}
-//           >
-//             Logout
-//           </button>
-//         </>
-//       )}
-//     </Row>
-//   );
-// };
+
