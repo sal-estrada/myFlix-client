@@ -27,11 +27,13 @@ export const MainView = () => {
       .then((data) => {
         const moviesFromApi = data.map((doc) => {
           return {
-            id: doc.key,
+            id: doc._id,
             Title: doc.Title,
             Description: doc.Description,
+            Genre: doc.Genre,
             image: "",
-            director: doc.director,
+            Director: doc.director,
+            Actors: doc.Actors
           };
         });
 
